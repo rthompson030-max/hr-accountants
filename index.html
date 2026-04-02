@@ -12,7 +12,6 @@
 
     <style>
         :root {
-            /* Colors */
             --navy: #1a2e4a;
             --white: #ffffff;
             --light-grey: #f4f4f4;
@@ -20,22 +19,15 @@
             --text-dark: #333333;
             --text-light: #555555;
             --border-color: #e0e0e0;
-
-            /* Typography */
             --font-main: 'Inter', sans-serif;
-
-            /* Spacing */
             --section-padding: 80px 20px;
             --max-width: 1200px;
-
-            /* Styles */
             --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.05);
             --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.1);
             --border-radius-sm: 4px;
             --border-radius-md: 8px;
         }
 
-        /* Base Reset */
         *,
         *::before,
         *::after {
@@ -71,7 +63,6 @@
             margin: 0 auto;
         }
 
-        /* Buttons */
         .btn {
             display: inline-block;
             padding: 12px 28px;
@@ -102,7 +93,6 @@
             background-color: #125e54;
         }
 
-        /* SECTION: Navigation */
         header {
             position: sticky;
             top: 0;
@@ -143,7 +133,6 @@
             color: var(--teal);
         }
 
-        /* SECTION: Hero */
         .hero {
             background-color: var(--light-grey);
             padding: var(--section-padding);
@@ -183,54 +172,100 @@
             font-weight: 500;
         }
 
-        .hero-image-wrapper {
-            flex: 1;
-        }
-
-        .hero-img {
-            width: 100%;
-            border-radius: 16px;
-            box-shadow: var(--shadow-subtle);
-        }
-
-        /* SECTION: Services */
         .services {
-            background-color: var(--white);
-            padding: var(--section-padding);
+            max-width: 1180px;
+            margin: auto;
+            padding: 80px 40px;
+            background: #E8EEEE;
         }
 
-        .section-headline {
-            text-align: center;
-            font-size: 2.25rem;
-            color: var(--navy);
-            margin-bottom: 56px;
-        }
-
-        .services-grid {
+        .services__body {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 32px;
+            grid-template-columns: 50% 50%;
         }
 
-        .service-card {
-            padding: 40px;
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-md);
-            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        .services__image-panel {
+            position: sticky;
+            top: 80px;
+            padding-right: 50px;
         }
 
-        .service-card:hover {
-            box-shadow: var(--shadow-hover);
-            border-color: transparent;
+        .services__image-wrap {
+            position: relative;
+            aspect-ratio: 3 / 3.8;
+            border-radius: 20px;
+            overflow: hidden;
         }
 
-        .service-icon {
-            font-size: 2.5rem;
+        .services__image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.05);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            will-change: opacity, transform;
+        }
+
+        .services__image.is-active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .services__list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-block {
+            padding: 70px 0 70px 40px;
+            border-bottom: 1px solid rgba(30, 92, 107, 0.12);
+            opacity: 1;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .service-block:last-child {
+            padding-bottom: 200px;
+            border-bottom: none;
+        }
+
+        /* .service-block.is-active {
+            opacity: 1;
+            transform: translateY(0);
+        } */
+
+        .service-block h2 {
+            font-size: 42px;
+            color: #1E5C6B;
+            margin-bottom: 15px;
+        }
+
+        .service-block p {
+            color: #5A5A5A;
             margin-bottom: 20px;
-            display: inline-block;
         }
 
-        /* SECTION: About */
+        .service-block ul {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .service-block li {
+            margin-bottom: 10px;
+        }
+
+        .service-block a {
+            display: inline-block;
+            padding: 12px 22px;
+            background: #1E6875;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+        }
+
         .about {
             background-color: var(--light-grey);
             padding: var(--section-padding);
@@ -243,34 +278,6 @@
             align-items: center;
         }
 
-        /* SECTION: Footer */
-        footer {
-            background-color: var(--navy);
-            color: var(--white);
-            padding: 64px 20px 32px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-container {
-                flex-direction: column;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-container {
-                flex-direction: column;
-                gap: 16px;
-            }
-        }
-
-        /* Tax & Compliance Section */
         .tax-compliance-section {
             background-color: #edf4f6;
             padding: 80px 0;
@@ -286,10 +293,11 @@
             align-items: center;
         }
 
-        .tax-compliance-image img {
+        .tax-compliance-image img,
+        .tax-compliance-image video {
             width: 100%;
             height: 100%;
-            max-height: 520px;
+            max-height: 600px;
             object-fit: cover;
             border-radius: 12px;
             display: block;
@@ -357,28 +365,92 @@
             transition: background-color 0.2s ease;
         }
 
-        .tax-compliance-btn:hover {
-            background-color: #1f6370;
+        footer {
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 64px 20px 32px;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 860px) {
+            .services__body {
+                grid-template-columns: 1fr;
+            }
+
+            .services__image-panel {
+                position: relative;
+                padding: 0;
+                margin-bottom: 30px;
+                top: auto;
+            }
+
+            .service-block {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            .hero-container {
+                flex-direction: column;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
             .tax-compliance-inner {
                 grid-template-columns: 1fr;
                 gap: 36px;
                 padding: 0 20px;
             }
 
-            .tax-compliance-section {
-                padding: 56px 0;
+            .nav-container {
+                flex-direction: column;
+                gap: 16px;
             }
+        }
 
-            .tax-compliance-heading {
-                font-size: 2rem;
-            }
+        .services__body {
+            display: flex !important;
+            flex-direction: row !important;
+            gap: 50px;
+            align-items: flex-start;
+        }
 
-            .tax-compliance-image img {
-                max-height: 280px;
-            }
+        .services__image-panel {
+            flex: 1 !important;
+            position: sticky !important;
+            top: 100px !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        .services__image-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #e8eeee;
+        }
+
+        .services__image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .services__image.is-active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .services__list {
+            flex: 1;
         }
     </style>
 </head>
@@ -401,13 +473,13 @@
     </header>
 
     <main>
-        <!-- SECTION: Hero -->
         <section id="home" class="hero">
             <div class="container hero-container">
                 <div class="hero-content">
                     <div
-                        style="background: var(--navy); color: white; display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; position: relative; top: -6px;">
-                        West Bromwich's Trusted Accountants</div>
+                        style="background: var(--navy); color: white; display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 24px;">
+                        West Bromwich's Trusted Accountants
+                    </div>
                     <h1>Cost-effective accounting solutions for your business</h1>
                     <p>We provide accounts, Corporation Tax, business advisory and support services to a wide range of
                         businesses and individuals across the United Kingdom.</p>
@@ -418,50 +490,141 @@
                     </div>
                 </div>
                 <div style="flex: 1;">
-                    <img src="about-team.jpg" alt="HR Accountants team in West Bromwich"
+                    <img src="about-team.jpg" alt="HR Accountants team"
                         style="width: 100%; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);"
                         onerror="this.src='https://placehold.co/800x600/1a7a6e/white?text=HR+Accountants'">
                 </div>
             </div>
         </section>
 
-        <!-- SECTION: Services -->
+        <!-- SERVICES SECTION WITH CAROUSEL AND YOUR THREE IMAGES -->
         <section id="services" class="services">
-            <div class="container">
-                <h2 class="section-headline">Everything your business needs, under one roof</h2>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon">📊</div>
-                        <h3>Accounts & Corporation Tax</h3>
-                        <p>Comprehensive accounts preparation and corporation tax returns filed accurately and on time.
+            <div class="services__body">
+                <div class="services__image-panel">
+                    <div class="services__image-wrap">
+                        <img class="services__image is-active" data-index="0"
+                            src="accounting_bookkeeping_img_1775123014583.jpg">
+                        <img class="services__image" data-index="1" src="financial_advisory_img_1775123453811.jpg">
+                        <img class="services__image" data-index="2" src="tax-compliance.jpg">
+                    </div>
+                </div>
+                <div class="services__list">
+                    <div class="service-block" data-service="0"> <!-- Accounting -->
+                        <h2>Accounting & Bookkeeping</h2>
+                        <p>Accurate, up-to-date financial records that keep your business organized, compliant, and in
+                            control.</p>
+                        <ul>
+                            <li>Bookkeeping and reconciliation</li>
+                            <li>Financial statements</li>
+                            <li>Payroll support</li>
+                        </ul>
+                        <a href="#">View More</a>
+                    </div>
+                    <div class="service-block" data-service="1"> <!-- Financial Advisory -->
+                        <h2>Financial Advisory</h2>
+                        <p>Strategic financial guidance to help you plan, grow, and make confident business decisions.
                         </p>
+                        <ul>
+                            <li>Cash flow management</li>
+                            <li>Budgeting & forecasting</li>
+                            <li>Financial performance analysis</li>
+                        </ul>
+                        <a href="#">View More</a>
                     </div>
-                    <div class="service-card">
-                        <div class="service-icon">📒</div>
-                        <h3>Business Advisory</h3>
-                        <p>Practical, individual advice to help you improve your business and personal wealth.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">💼</div>
-                        <h3>Tax Planning</h3>
-                        <p>Strategic tax advice to minimise liabilities and maximise efficiency.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">📈</div>
-                        <h3>Support Services</h3>
-                        <p>Ongoing support tailored to your business needs, from startups to established companies.</p>
+                    <div class="service-block" data-service="2"> <!-- Tax -->
+                        <h2>Tax & Compliance</h2>
+                        <p>Reliable tax and regulatory support to reduce risk and ensure peace of mind.</p>
+                        <ul>
+                            <li>Tax preparation and filing</li>
+                            <li>Compliance support</li>
+                            <li>Tax efficiency advisory</li>
+                        </ul>
+                        <a href="#">View More</a>
                     </div>
                 </div>
             </div>
+            <script>
+                const blocks = document.querySelectorAll('.service-block');
+                const imageElements = document.querySelectorAll('.services__image');
+                const images = [
+                    'accounting_bookkeeping_img_1775123014583.jpg',
+                    'financial_advisory_img_1775123039771.jpg',
+                    'tax-compliance.jpg'
+                ];
+                let currentIndex = 0;
+
+                imageElements.forEach((img, i) => {
+                    img.src = images[i];
+                });
+
+                function activateImage(index) {
+                    if (index === currentIndex) return;
+
+                    // Update images
+                    imageElements.forEach((img, i) => {
+                        img.src = images[i];
+                        if (i === index) {
+                            img.classList.add('is-active');
+                        } else {
+                            img.classList.remove('is-active');
+                        }
+                    });
+
+                    currentIndex = index;
+                }
+
+                function getMostVisibleBlock() {
+                    let bestIndex = 0;
+                    let bestVisibility = 0;
+
+                    blocks.forEach((block, idx) => {
+                        const rect = block.getBoundingClientRect();
+                        const windowHeight = window.innerHeight;
+
+                        // Calculate how much of the block is visible
+                        const visibleTop = Math.max(rect.top, 0);
+                        const visibleBottom = Math.min(rect.bottom, windowHeight);
+                        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+                        const visibilityRatio = visibleHeight / rect.height;
+
+                        if (visibilityRatio > bestVisibility) {
+                            bestVisibility = visibilityRatio;
+                            bestIndex = idx;
+                        }
+                    });
+
+                    return bestIndex;
+                }
+
+                function checkAndUpdate() {
+                    const mostVisible = getMostVisibleBlock();
+                    activateImage(mostVisible);
+                }
+
+                // Throttled scroll handler
+                let ticking = false;
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        requestAnimationFrame(() => {
+                            checkAndUpdate();
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                });
+
+                window.addEventListener('resize', () => checkAndUpdate());
+                window.addEventListener('load', () => {
+                    checkAndUpdate();
+                });
+            </script>
         </section>
 
-        <!-- SECTION: About -->
         <section id="about" class="about">
             <div class="container about-grid">
                 <div>
-                    <img src="pexels-shootsaga-31851560.jpg" alt="HR Accountants team in West Bromwich"
-                        style="width: 100%; height: 400px; object-fit: cover; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);"
-                        onerror="this.src='https://placehold.co/700x500/1a7a6e/white?text=HR+Accountants'">
+                    <img src="pexels-shootsaga-31851560.jpg" alt="HR Accountants team"
+                        style="width: 100%; height: 400px; object-fit: cover; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
                 </div>
                 <div>
                     <h2 style="font-size: 2.25rem; color: var(--navy); margin-bottom: 24px;">A firm that genuinely cares
@@ -482,55 +645,43 @@
             </div>
         </section>
 
-        <!-- TAX & COMPLIANCE SECTION -->
         <section id="tax" class="tax-compliance-section">
             <div class="tax-compliance-inner">
-                <div class="tax-compliance-content">
-                    <h2 class="tax-compliance-heading">Tax &amp; Compliance</h2>
-                    <p class="tax-compliance-body">
-                        Reliable tax and regulatory support to reduce risk and ensure peace of mind.
+                <div class="tax-compliance-content" style="gap: 24px;">
+                    <div
+                        style="background: rgba(0,0,0,0.06); color: #1a3a5c; display: inline-flex; align-items: center; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; gap: 6px; width: max-content;">
+                        <span style="color: #2a7f8f;">✦</span> Get In Touch
+                    </div>
+                    <h2 class="tax-compliance-heading" style="font-size: 3rem; line-height: 1.1;">
+                        Take Your <span
+                            style="font-family: Georgia, serif; font-style: italic; color: #2a7f8f; font-weight: 500;">Business</span>
+                        to<br>The Next Financial Level
+                    </h2>
+                    <p class="tax-compliance-body" style="font-size: 1.125rem; max-width: 480px;">
+                        Partner with HR Accountants for precise accounting and actionable financial insights that help
+                        your business grow.
                     </p>
-                    <ul class="tax-compliance-list">
-                        <li>
-                            <svg class="tax-compliance-check" viewBox="0 0 16 16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M3 8.5L6.5 12L13 5" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                            Corporation Tax preparation and filing
-                        </li>
-                        <li>
-                            <svg class="tax-compliance-check" viewBox="0 0 16 16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M3 8.5L6.5 12L13 5" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                            Accounts compliance support
-                        </li>
-                        <li>
-                            <svg class="tax-compliance-check" viewBox="0 0 16 16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M3 8.5L6.5 12L13 5" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                            Tax efficiency advisory
-                        </li>
-                    </ul>
-                    <a href="#contact" class="tax-compliance-btn">Get Advice &#8599;</a>
+                    <a href="#contact" class="tax-compliance-btn">
+                        Book a Free Consultation
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </a>
                 </div>
-
                 <div class="tax-compliance-image">
-                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80"
-                        alt="Tax documents and calculator" loading="lazy" />
+                    <video src="338904_medium.mp4" autoplay muted loop playsinline
+                        style="width: 100%; height: 100%; max-height: 600px; object-fit: cover; border-radius: 12px; display: block;"></video>
                 </div>
             </div>
         </section>
-        <!-- END TAX & COMPLIANCE SECTION -->
 
-        <!-- SECTION: Testimonials -->
         <section id="testimonials" style="padding: 80px 20px; background: white;">
             <div class="container">
-                <h2 class="section-headline">What our clients say</h2>
+                <h2 class="section-headline"
+                    style="text-align: center; font-size: 2.25rem; color: var(--navy); margin-bottom: 56px;">What our
+                    clients say</h2>
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;">
                     <div style="padding: 32px; border: 1px solid var(--border-color); border-radius: 12px;">
                         <p>⭐⭐⭐⭐⭐</p>
@@ -554,7 +705,6 @@
             </div>
         </section>
 
-        <!-- SECTION: CTA -->
         <section style="background: var(--navy); color: white; text-align: center; padding: 80px 20px;">
             <div class="container">
                 <h2 style="font-size: 2.5rem; margin-bottom: 16px;">Ready to take control of your finances?</h2>
@@ -567,58 +717,47 @@
             </div>
         </section>
 
-        <!-- SECTION: Contact -->
         <section id="contact" style="padding: 80px 20px; background: var(--light-grey);">
             <div class="container"
                 style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 64px; align-items: center;">
-                <div
-                    style="background: white; padding: 40px; border-radius: 12px; box-shadow: var(--shadow-subtle); position: relative;">
-                    <div
-                        style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); background: white; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border-color); font-weight: 700; color: var(--navy); box-shadow: var(--shadow-subtle);">
-                        HR Accountants
-                    </div>
+                <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: var(--shadow-subtle);">
                     <form onsubmit="event.preventDefault(); alert('Thank you! HR Accountants will be in touch soon.');">
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">Full Name</label>
-                            <input type="text"
+                        <div style="margin-bottom: 20px;"><label
+                                style="display: block; margin-bottom: 8px; font-weight: 500;">Full Name</label><input
+                                type="text"
                                 style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 4px;">
                         </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">Email</label>
-                            <input type="email"
+                        <div style="margin-bottom: 20px;"><label
+                                style="display: block; margin-bottom: 8px; font-weight: 500;">Email</label><input
+                                type="email"
                                 style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 4px;">
                         </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">Phone</label>
-                            <input type="tel"
+                        <div style="margin-bottom: 20px;"><label
+                                style="display: block; margin-bottom: 8px; font-weight: 500;">Phone</label><input
+                                type="tel"
                                 style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 4px;">
                         </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">How can we
-                                help?</label>
-                            <select
+                        <div style="margin-bottom: 20px;"><label
+                                style="display: block; margin-bottom: 8px; font-weight: 500;">How can we
+                                help?</label><select
                                 style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 4px;">
                                 <option>Accounts & Corporation Tax</option>
                                 <option>Business Advisory</option>
                                 <option>Tax Planning</option>
                                 <option>General Enquiry</option>
-                            </select>
-                        </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; margin-bottom: 8px; font-weight: 500;">Message</label>
-                            <textarea
+                            </select></div>
+                        <div style="margin-bottom: 20px;"><label
+                                style="display: block; margin-bottom: 8px; font-weight: 500;">Message</label><textarea
                                 style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 4px; height: 120px;"></textarea>
                         </div>
                         <button type="submit" class="btn btn-navy" style="width: 100%;">Send Enquiry</button>
                     </form>
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 32px; text-align: center;">
-                    <div>
-                        <strong>📞 0121 553 5019</strong>
+                    <div><strong>📞 0121 553 5019</strong>
                         <p>0791 221 7914</p>
                     </div>
-                    <div>
-                        <strong>📍 149 Spon Lane, West Bromwich</strong>
+                    <div><strong>📍 149 Spon Lane, West Bromwich</strong>
                         <p>West Midlands B70 6AS</p>
                         <p>Office hours: Mon–Fri, 9am–5pm</p>
                     </div>
@@ -630,11 +769,9 @@
     <footer>
         <div class="container"
             style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-            <p>&copy; 2026 HR Accountants. All rights reserved.</p>
-            <div style="display: flex; gap: 24px;">
-                <a href="#" style="color: #a0aec0;">Privacy Policy</a>
-                <a href="#" style="color: #a0aec0;">Terms of Use</a>
-            </div>
+            <p>© 2026 HR Accountants. All rights reserved.</p>
+            <div style="display: flex; gap: 24px;"><a href="#" style="color: #a0aec0;">Privacy Policy</a><a href="#"
+                    style="color: #a0aec0;">Terms of Use</a></div>
         </div>
     </footer>
 
