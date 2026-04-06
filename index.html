@@ -38,6 +38,7 @@
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         body {
@@ -46,6 +47,8 @@
             background-color: var(--white);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            padding-top: 80px;
         }
 
         img {
@@ -94,11 +97,19 @@
         }
 
         header {
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
             background-color: var(--white);
             border-bottom: 1px solid var(--border-color);
-            z-index: 100;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            box-shadow: var(--shadow-subtle);
+            border-bottom-color: transparent;
         }
 
         .nav-container {
@@ -371,43 +382,6 @@
             padding: 64px 20px 32px;
         }
 
-        @media (max-width: 860px) {
-            .services__body {
-                grid-template-columns: 1fr;
-            }
-
-            .services__image-panel {
-                position: relative;
-                padding: 0;
-                margin-bottom: 30px;
-                top: auto;
-            }
-
-            .service-block {
-                opacity: 1 !important;
-                transform: none !important;
-            }
-
-            .hero-container {
-                flex-direction: column;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .tax-compliance-inner {
-                grid-template-columns: 1fr;
-                gap: 36px;
-                padding: 0 20px;
-            }
-
-            .nav-container {
-                flex-direction: column;
-                gap: 16px;
-            }
-        }
-
         .services__body {
             display: flex !important;
             flex-direction: row !important;
@@ -422,6 +396,7 @@
             display: block !important;
             visibility: visible !important;
             opacity: 1 !important;
+            padding-top: 70px !important;
         }
 
         .services__image-wrap {
@@ -452,6 +427,72 @@
         .services__list {
             flex: 1;
         }
+
+        @media (max-width: 860px) {
+            .services__body {
+                flex-direction: column !important;
+            }
+
+            .services__image-panel {
+                position: relative !important;
+                padding: 0 !important;
+                margin-bottom: 30px;
+                top: auto !important;
+                display: block !important;
+            }
+
+            .service-block {
+                opacity: 1 !important;
+                transform: none !important;
+                padding: 40px 0 !important;
+            }
+
+            .hero-container {
+                flex-direction: column;
+                gap: 32px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .tax-compliance-inner {
+                grid-template-columns: 1fr;
+                gap: 36px;
+                padding: 0 20px;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 16px;
+            }
+
+            .testimonials-grid,
+            .contact-grid {
+                grid-template-columns: 1fr !important;
+                gap: 32px !important;
+            }
+
+            .hero-content h1 {
+                font-size: 2.25rem !important;
+            }
+
+            .tax-compliance-heading {
+                font-size: 2.25rem !important;
+            }
+
+            .service-block h2 {
+                font-size: 32px !important;
+            }
+        }
     </style>
 </head>
 
@@ -464,7 +505,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#tax">Tax</a></li>
+                <li><a href="#financial-growth">Financial Growth</a></li>
                 <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="#contact" class="btn btn-navy" style="color: white;">Request a Callback</a></li>
@@ -617,14 +658,24 @@
                 window.addEventListener('load', () => {
                     checkAndUpdate();
                 });
+
+                // Sticky Header Scroll Logic
+                window.addEventListener('scroll', () => {
+                    const header = document.querySelector('header');
+                    if (window.scrollY > 20) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
             </script>
         </section>
 
         <section id="about" class="about">
             <div class="container about-grid">
                 <div>
-                    <img src="pexels-shootsaga-31851560.jpg" alt="HR Accountants team"
-                        style="width: 100%; height: 400px; object-fit: cover; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                    <img src="pexels-mike-alviza-205954711-11668001.jpg" alt="HR Accountants team"
+                        style="width: 100%; height: 600px; object-fit: cover; object-position: top; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
                 </div>
                 <div>
                     <h2 style="font-size: 2.25rem; color: var(--navy); margin-bottom: 24px;">A firm that genuinely cares
@@ -645,7 +696,7 @@
             </div>
         </section>
 
-        <section id="tax" class="tax-compliance-section">
+        <section id="financial-growth" class="tax-compliance-section">
             <div class="tax-compliance-inner">
                 <div class="tax-compliance-content" style="gap: 24px;">
                     <div
@@ -671,7 +722,8 @@
                     </a>
                 </div>
                 <div class="tax-compliance-image">
-                    <video src="https://res.cloudinary.com/dmxhywc5c/video/upload/v1775149954/sea_1_x2witv.mp4" autoplay muted loop playsinline style="width: 100%; border-radius: 12px;"></video>
+                    <video src="https://res.cloudinary.com/dmxhywc5c/video/upload/v1775149954/sea_1_x2witv.mp4" autoplay
+                        muted loop playsinline style="width: 100%; border-radius: 12px;"></video>
 
                 </div>
             </div>
@@ -682,7 +734,7 @@
                 <h2 class="section-headline"
                     style="text-align: center; font-size: 2.25rem; color: var(--navy); margin-bottom: 56px;">What our
                     clients say</h2>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;">
+                <div class="testimonials-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;">
                     <div style="padding: 32px; border: 1px solid var(--border-color); border-radius: 12px;">
                         <p>⭐⭐⭐⭐⭐</p>
                         <p style="font-style: italic; margin: 16px 0;">"HR Accountants have been looking after my
@@ -718,7 +770,7 @@
         </section>
 
         <section id="contact" style="padding: 80px 20px; background: var(--light-grey);">
-            <div class="container"
+            <div class="container contact-grid"
                 style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 64px; align-items: center;">
                 <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: var(--shadow-subtle);">
                     <form onsubmit="event.preventDefault(); alert('Thank you! HR Accountants will be in touch soon.');">
